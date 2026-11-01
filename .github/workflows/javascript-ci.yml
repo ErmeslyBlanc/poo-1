@@ -1,0 +1,29 @@
+name: JavaScript checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check JavaScript syntax
+        run: |
+          node --check aula10-09.js
+          node --check index2.js
+          node --check index3.js
+      - name: Run example scripts
+        run: |
+          node aula10-09.js
+          node index2.js
+          node index3.js
